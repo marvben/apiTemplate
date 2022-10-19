@@ -7,13 +7,6 @@ const saltRounds = 10;
 const jwt = require("jsonwebtoken");
 const Task = require("./task");
 
-main().catch((err) => console.log(err));
-
-async function main() {
-  const url = "mongodb://localhost:27017/task-manager-api-DB";
-  await mongoose.connect(url);
-}
-
 const userSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, trim: true },
