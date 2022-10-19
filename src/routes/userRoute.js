@@ -4,7 +4,7 @@ const User = require("../models/user");
 const auth = require("../middleware/auth");
 const multer = require("multer");
 const sharp = require("sharp");
-const { sendWelcomeEmail, sendGoodbyeEmail } = require("../emails/account");
+//const { sendWelcomeEmail, sendGoodbyeEmail } = require("../emails/account");
 
 const upload = multer({
   limits: {
@@ -15,7 +15,6 @@ const upload = multer({
       return cb(new Error("Only jpg,jpeg,png images are allowed. Please upload an image!"));
     }
     return cb(undefined, true);
-    //cd(undefined, false)
   },
 });
 
@@ -25,7 +24,7 @@ userRouter
     try {
       const token = await user.getAuthToken(); //created our function for schema 'getAuthToken'
       await user.save();
-      await sendWelcomeEmail(user.email, user.name);
+      //await sendWelcomeEmail(user.email, user.name);
       res.status(201).send({ user, token });
     } catch (error) {
       res.status(400).send(error);
@@ -119,7 +118,7 @@ userRouter
   })
   .delete("/user/profile", auth, async (req, res) => {
     try {
-      await sendGoodbyeEmail(req.user.email, req.user.name);
+      //await sendGoodbyeEmail(req.user.email, req.user.name);
       await req.user.remove();
       res.send({ "Deleted User": req.user });
     } catch (error) {

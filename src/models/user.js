@@ -1,3 +1,5 @@
+const { resolve } = require("path");
+require("dotenv").config({ path: resolve(__dirname, "../src/config/.env") });
 const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
@@ -83,7 +85,7 @@ userSchema.methods.toJSON = function () {
 //getting users token with jwt
 userSchema.methods.getAuthToken = async function () {
   const user = this;
-  const newToken = jwt.sign({ _id: user._id.toString() }, "sekret12345");
+  const newToken = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET);
   user.tokens = user.tokens.concat({ token: newToken });
   await user.save();
 
