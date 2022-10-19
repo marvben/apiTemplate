@@ -3,11 +3,9 @@ require("dotenv").config({ path: resolve(__dirname, "../config/.env") });
 const express = require("express");
 const userRouter = require("./routes/userRoute");
 const taskRouter = require("./routes/taskRoute");
-const { response } = require("express");
-require("./db/db");
 const app = express();
 const port = process.env.PORT;
-console.log;
+
 //Without middleware: new request -> run router handler
 //With middleware: new request ->run middleware -> run router handler
 // app.use((req, res, next) => {
